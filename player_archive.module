@@ -1,0 +1,19 @@
+<?php
+/**
+ *  @file
+ *  Player Archive
+ *  node convert API
+ *
+ *  When a player is archived, the season is set in the archive content type
+ *  using the current year, and the previous year.
+ */
+
+/**
+ * Implements hook_node_convert_presave()
+ */
+function player_archive_node_convert_presave($node, $hook_options = array()) {
+  $season1 = date('Y', time());
+  $season2 = date('Y', time())-1;
+  $node->field_season['und'][0]['value'] = $season1 . '-' . $season2;
+}
+
